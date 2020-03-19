@@ -5,7 +5,7 @@
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 
-namespace std
+/*namespace std
 {
 template<>
 struct hash<QString>
@@ -16,4 +16,4 @@ struct hash<QString>
     return qHash(s);
   }
 };
-}
+}*/
