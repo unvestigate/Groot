@@ -136,9 +136,6 @@ endif()
 
 target_link_libraries(behavior_tree_editor ${GROOT_DEPENDENCIES} )
 
-if(WIN32)
-    target_compile_definitions(behavior_tree_editor PRIVATE BT_EDITOR_EXPORTS)
-endif()
 
 add_executable(Groot ./bt_editor/main.cpp  ${RESOURCE_FILES})
 target_link_libraries(Groot behavior_tree_editor )

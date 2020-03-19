@@ -32,7 +32,7 @@ class FlowScene;
 class Node;
 }
 
-class BT_EDITOR_PUBLIC MainWindow : public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
