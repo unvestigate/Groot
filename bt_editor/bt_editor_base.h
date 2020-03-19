@@ -10,6 +10,16 @@
 #include <deque>
 #include <behaviortree_cpp_v3/bt_factory.h>
 
+#if defined(_MSC_VER)
+    #if defined(BT_EDITOR_EXPORTS)
+        #define BT_EDITOR_PUBLIC __declspec(dllexport)
+    #else
+        #define BT_EDITOR_PUBLIC __declspec(dllimport)
+    #endif
+#else
+    #define BT_EDITOR_PUBLIC
+#endif
+
 using BT::NodeStatus;
 using BT::NodeType;
 using BT::PortDirection;
@@ -86,7 +96,7 @@ struct AbstractTreeNode
     }
 };
 
-class AbsBehaviorTree
+class BT_EDITOR_PUBLIC AbsBehaviorTree
 {
 public:
 

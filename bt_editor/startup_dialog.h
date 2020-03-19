@@ -9,7 +9,7 @@ namespace Ui {
 class StartupDialog;
 }
 
-class StartupDialog : public QDialog
+class BT_EDITOR_PUBLIC StartupDialog : public QDialog
 {
     Q_OBJECT
 
