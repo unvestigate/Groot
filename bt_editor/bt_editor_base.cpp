@@ -192,7 +192,8 @@ const NodeModels &BuiltinNodeModels()
     {
         BT::BehaviorTreeFactory factory;
 
-        factory.registerNodeType<BT::DecoratorSubtreeNode>("Root");
+        //factory.registerNodeType<BT::SubtreeNode>("Root"); // Newer versions of the BT lib
+		factory.registerNodeType<BT::DecoratorSubtreeNode>("Root");
 
         NodeModels out;
         for( const auto& it: factory.manifests())

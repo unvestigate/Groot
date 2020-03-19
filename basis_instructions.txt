@@ -1,0 +1,11 @@
+Groot building instructions for Basis:
+
+-In CMake
+	-Set Qt5_DIR to C:\Qt\Qt5.14.1\5.14.1\msvc2015_64\lib\cmake\Qt5 or something similar
+	-If Qt5Test_DIR cannot be resolved, set it to C:/Qt/Qt5.14.1/5.14.1/msvc2015_64/lib/cmake/Qt5Test or something similar
+
+-Generate the projects
+
+-In VS2015 (or which ever version you are using)
+	-Enable C++ exceptions for the behaviortree_cpp_v3 project (C/C++ -> All Options "Enable C++ Exceptions")
+	
