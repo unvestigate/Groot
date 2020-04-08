@@ -461,32 +461,41 @@ QString MainWindow::saveToXML() const
 
     QDomElement root_models = doc.createElement("TreeNodesModel");
 
-    for(const auto& tree_it: _treenode_models)
-    {
-        const auto& ID    = tree_it.first;
-        const auto& model = tree_it.second;
+	for (const auto& tree_it : _treenode_models)
+	{
+		const auto& ID = tree_it.first;
+		const auto& model = tree_it.second;
 
-        if( BuiltinNodeModels().count(ID) != 0 )
-        {
-            continue;
-        }
+		if (BuiltinNodeModels().count(ID) != 0)
+		{
+			continue;
+		}
 
-        QDomElement node = doc.createElement( QString::fromStdString(toStr(model.type)) );
+		QDomElement node = doc.createElement(QString::fromStdString(toStr(model.type)));
 
-        if( !node.isNull() )
-        {
-            node.setAttribute("ID", ID);
+		// For Basis we only write the subtrees to the model data.
+#ifdef GROOT_BASIS_XML_OUTPUT
+		if(model.type == NodeType::SUBTREE)
+		{
+#endif
+			if (!node.isNull())
+			{
+				node.setAttribute("ID", ID);
 
-            for(const auto& port_it: model.ports)
-            {
-                const auto& port_name = port_it.first;
-                const auto& port = port_it.second;
+				for (const auto& port_it : model.ports)
+				{
+					const auto& port_name = port_it.first;
+					const auto& port = port_it.second;
 
-                QDomElement port_element = writePortModel(port_name, port, doc);
-                node.appendChild( port_element );
-            }
-        }
-        root_models.appendChild(node);
+					QDomElement port_element = writePortModel(port_name, port, doc);
+					node.appendChild(port_element);
+				}
+			}
+			root_models.appendChild(node);
+
+#ifdef GROOT_BASIS_XML_OUTPUT
+		}
+#endif
     }
     root.appendChild(root_models);
     root.appendChild( doc.createComment(COMMENT_SEPARATOR) );

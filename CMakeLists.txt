@@ -7,6 +7,9 @@ endif()
 
 project(groot)
 
+# Added for Basis.
+ADD_DEFINITIONS(-DGROOT_BASIS_XML_OUTPUT)
+
 find_package(Qt5 COMPONENTS  Core Widgets Gui OpenGL Xml Svg)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}  "${CMAKE_CURRENT_LIST_DIR}/cmake")
 

@@ -148,11 +148,23 @@ void RecursivelyCreateXml(const FlowScene &scene, QDomDocument &doc, QDomElement
     {
         element = doc.createElement( registration_name.toStdString().c_str() );
     }
-    else{
-        element = doc.createElement( QString::fromStdString(toStr(bt_node->nodeType())) );
+    else
+	{
+		// For Basis we turn save SubTree nodes as SubTreeWrapper nodes, since
+		// we explicitly want the sub-trees to use the same blackboards as the main tree.
+#ifdef GROOT_BASIS_XML_OUTPUT
+		if (bt_node->nodeType() == NodeType::SUBTREE)
+		{
+			element = doc.createElement(QString::fromStdString("SubTreeWrapper"));
+		}
+		else
+#endif
+		{
+			element = doc.createElement(QString::fromStdString(toStr(bt_node->nodeType())));
+		}
+        
         element.setAttribute("ID", registration_name.toStdString().c_str() );
     }
-
 
     bool is_subtree_expanded = false;
     if( auto subtree = dynamic_cast<const SubtreeNodeModel*>(node_model)  )
